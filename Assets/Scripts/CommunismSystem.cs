@@ -3,13 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class CommunismSystem : MonoBehaviour
 {
     public int followers = 0;
-    public int communism = 0;
 
+    public int communism = 0;
+    
+    // Intrusive Thought Minigame
+    private Transform thoughtSpawnPoint;
+    public GameObject intrusiveThoughtBoard;
+    
     // Wanted System
     
     public int percentToStar = 0;
@@ -38,11 +44,15 @@ public class CommunismSystem : MonoBehaviour
 
     private bool isPopulation = false;
 
+    [SerializeField] private GameObject interactionSliderPrefab;
+
+    public GameObject middleOfScreenPoint;
+
     public void OnInteract(InputAction.CallbackContext ctxt)
     {
         if (ctxt.started && isPopulation)
         {
-            StartInfluence();
+            StartIntrusiveThoughtMinigame();
         }
     }
 
@@ -51,6 +61,7 @@ public class CommunismSystem : MonoBehaviour
         if(other.CompareTag("Population"))
         {
             isPopulation = true;
+            thoughtSpawnPoint = other.gameObject.transform.GetComponentInChildren<Transform>();
         }
     }
 
@@ -59,22 +70,27 @@ public class CommunismSystem : MonoBehaviour
         if(other.CompareTag("Population"))
         {
             isPopulation = false;
+            thoughtSpawnPoint = null;
         }
     }
-    private void StartInfluence()
-    {
-        int randomSuccess = Random.Range(minimumSuccessRate, 100);
 
-        Debug.Log(randomSuccess + " / " + influenceSuccessRate);
+    private void StartIntrusiveThoughtMinigame()
+    {
+        GameObject minigameBoard = Instantiate(intrusiveThoughtBoard, thoughtSpawnPoint);
         
-        if (randomSuccess >= influenceSuccessRate)
+        float distanceToMoveX = (middleOfScreenPoint.transform.position.x - minigameBoard.transform.position.x) / 100;
+        float distanceToMoveY = (middleOfScreenPoint.transform.position.y - minigameBoard.transform.position.y) / 100;
+        
+        StartCoroutine(WaitToMove(minigameBoard, distanceToMoveX, distanceToMoveY));
+    }
+
+    private IEnumerator WaitToMove(GameObject minigameBoard, float distanceToMoveX, float distanceToMoveY)
+    {
+        for (int i = 0; i < 100; i++)
         {
-            communism += Random.Range(communisumGainedMinimum, communismGainedMaximum);
-            followers += Random.Range(follwersGainedMinimum, followersGainedMaximum);
-        }
-        else
-        {
-            //percentToStar += Random.Range(percentToStarIncreaseMinimum, percentToStarIncreaseMaximum);
+            minigameBoard.transform.position += new Vector3(distanceToMoveX, distanceToMoveY, 0);
+            minigameBoard.transform.localScale += new Vector3(.1f, .04f, 0);
+            yield return new WaitForSeconds(.05f);
         }
     }
 }
