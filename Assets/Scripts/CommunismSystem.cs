@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -24,11 +26,11 @@ public class CommunismSystem : MonoBehaviour
     public int intrusiveThoughtsMinimum = 20;
     public int intrusiveThoughtsMaximum = 30;
 
-    private int totalIntrusiveThoughts = -1;
+    public int totalIntrusiveThoughts = -1;
 
-    public int intrusiveThoughtsFailedToClick = 0;
+    public int totalIntrusiveThoughtsLeft;
     
-    public int chanceToSucceed = 100;
+    public float chanceToSucceed = 100;
 
     public int totalIntrusiveThoughtsDestroyed = -1;
     
@@ -70,7 +72,9 @@ public class CommunismSystem : MonoBehaviour
 
     private void Update()
     {
-        if (totalIntrusiveThoughtsDestroyed >= totalIntrusiveThoughts && doneSpawningIntrusiveThoughts)
+        UpdateEnemyCount();
+        UpdatePercentToSucceed();
+        if ((totalIntrusiveThoughtsDestroyed >= totalIntrusiveThoughts && doneSpawningIntrusiveThoughts) || chanceToSucceed <= 0)
         {
             EndIntrusiveThoughtMinigame();
         }
@@ -85,6 +89,7 @@ public class CommunismSystem : MonoBehaviour
         if (hit.collider.CompareTag("IntrusiveThought"))
         {
             totalIntrusiveThoughtsDestroyed += 1;
+            totalIntrusiveThoughtsLeft -= 1;
             Destroy(hit.collider.gameObject);
         }
         else
@@ -119,6 +124,22 @@ public class CommunismSystem : MonoBehaviour
         }
     }
 
+    private void UpdateEnemyCount()
+    {
+        if (GameObject.Find("Enemy Counter") == null) return;
+        GameObject enemiesLeftText = GameObject.Find("Enemies Left");
+        
+        enemiesLeftText.GetComponent<TextMeshProUGUI>().text =  totalIntrusiveThoughtsLeft.ToString();
+    }
+
+    private void UpdatePercentToSucceed()
+    {
+        if (GameObject.Find("Percent Text") == null) return;
+        GameObject percentText = GameObject.Find("Percent Text");
+        
+        percentText.GetComponent<TextMeshProUGUI>().text = Mathf.Ceil(chanceToSucceed) + "%";
+    }
+    
     private void StartIntrusiveThoughtMinigame()
     {
         minigameBoard = Instantiate(intrusiveThoughtBackgroundPrefab, thoughtSpawnPoint);
@@ -134,13 +155,14 @@ public class CommunismSystem : MonoBehaviour
     {
         int didPlayerSucceed = Random.Range(0, 100);
         
+        Destroy(minigameBoard);
+        _playerMovement.shouldMove = true;
+        doneSpawningIntrusiveThoughts = false;
+        
         if (didPlayerSucceed <= chanceToSucceed)
         {
             followers += Random.Range(followersGainedMinimum, followersGainedMaximum);
             communism += Random.Range(communisumGainedMinimum, communismGainedMaximum);
-            Destroy(minigameBoard);
-            _playerMovement.shouldMove = true;
-            doneSpawningIntrusiveThoughts = false;
         }
         else
         {
@@ -150,7 +172,8 @@ public class CommunismSystem : MonoBehaviour
     
     private IEnumerator SpawnIntrusiveThoughts(GameObject minigameBoard)
     {
-        int totalIntrusiveThoughts = Random.Range(intrusiveThoughtsMinimum, intrusiveThoughtsMaximum);
+        totalIntrusiveThoughts = Random.Range(intrusiveThoughtsMinimum, intrusiveThoughtsMaximum);
+        totalIntrusiveThoughtsLeft = totalIntrusiveThoughts;
         Transform spawnPoints = minigameBoard.transform.Find("Spawn Points");
         List<Transform> intrusiveThoughts = new List<Transform>();
         foreach (Transform intrusiveThoughtSpawnPoint in spawnPoints.transform.GetComponentInChildren<Transform>())

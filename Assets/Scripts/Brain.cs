@@ -7,16 +7,16 @@ public class Brain : MonoBehaviour
 {
     private CommunismSystem communismSystem;
     private void Start()
-    {
-        communismSystem = GameObject.FindObjectOfType<CommunismSystem>();
+    { 
+        communismSystem = FindObjectOfType<CommunismSystem>();
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("IntrustiveThought"))
-        {
-            communismSystem.totalIntrusiveThoughtsDestroyed += 1;
-            Destroy(other.gameObject);
-        }
+        Debug.Log("Triggered");
+        if (!other.gameObject.CompareTag("IntrusiveThought")) return;
+        communismSystem.chanceToSucceed -= (100 / (communismSystem.totalIntrusiveThoughts * .25f));
+        communismSystem.totalIntrusiveThoughtsDestroyed += 1;
+        communismSystem.totalIntrusiveThoughtsLeft -= 1;
+        Destroy(other.gameObject);
     }
 }

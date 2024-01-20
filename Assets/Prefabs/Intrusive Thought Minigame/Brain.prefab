@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7977312187834747192}
   - component: {fileID: 1177960748259117110}
   - component: {fileID: 8134405379450335853}
+  - component: {fileID: 415348281895706209}
   m_Layer: 0
   m_Name: Brain
   m_TagString: Untagged
@@ -133,3 +134,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1a1828353f0d04c881190a8d1b91c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &415348281895706209
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621742929585624651}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
