@@ -760,7 +760,7 @@ MonoBehaviour:
   - {fileID: 4974669869373887019, guid: 03571916910ef504e8c6a9a41202525a, type: 3}
   - {fileID: 5832466708425074569, guid: 6e2b8d14d177db34bbff9d3ed88ba56a, type: 3}
   - {fileID: 8468190556887751580, guid: c82530957b539c84fa209f5b37cfade4, type: 3}
-  intrusiveThoughtSecondsTillSpawn: 0.05
+  intrusiveThoughtSecondsTillSpawn: 0.3
   intrusiveThoughtsMinimum: 20
   intrusiveThoughtsMaximum: 30
   percentToStar: 0

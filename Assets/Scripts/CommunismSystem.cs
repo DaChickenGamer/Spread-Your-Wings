@@ -18,7 +18,7 @@ public class CommunismSystem : MonoBehaviour
     public GameObject intrusiveThoughtBackgroundPrefab;
     public List<GameObject> intrusiveThoughtsPrefabs;
     
-    public float intrusiveThoughtSecondsTillSpawn = .05f; 
+    public float intrusiveThoughtSecondsTillSpawn = .1f; 
     public int intrusiveThoughtsMinimum = 20;
     public int intrusiveThoughtsMaximum = 30;
     

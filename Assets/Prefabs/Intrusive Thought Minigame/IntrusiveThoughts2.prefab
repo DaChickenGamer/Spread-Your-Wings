@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3494341775141606785}
   - component: {fileID: 9158704735323241131}
   - component: {fileID: 5491782189951393108}
+  - component: {fileID: 1814942553228296066}
   m_Layer: 0
   m_Name: IntrusiveThoughts2
   m_TagString: IntrustiveThought
@@ -120,3 +121,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.45
+--- !u!114 &1814942553228296066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5832466708425074569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc696272fb9945b45a2f3d3615f8c150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
