@@ -145,9 +145,10 @@ public class CommunismSystem : MonoBehaviour
         minigameBoard = Instantiate(intrusiveThoughtBackgroundPrefab, thoughtSpawnPoint);
         
         _playerMovement.shouldMove = false;
-        
-        float distanceToMoveX = (middleOfScreenPoint.transform.position.x - minigameBoard.transform.position.x) / 100;
-        float distanceToMoveY = (middleOfScreenPoint.transform.position.y - minigameBoard.transform.position.y) / 100;
+
+        var position = middleOfScreenPoint.transform.position;
+        float distanceToMoveX = (position.x - position.x) / 100;
+        float distanceToMoveY = (position.y - position.y) / 100;
         
         StartCoroutine(WaitToMove(minigameBoard, distanceToMoveX, distanceToMoveY));
     }
@@ -166,7 +167,13 @@ public class CommunismSystem : MonoBehaviour
         }
         else
         {
-            // Add the wanted system here
+            var amountToIncreaseStar = Random.Range(percentToStarIncreaseMinimum, percentToStarIncreaseMaximum);
+            
+            percentToStar += amountToIncreaseStar;
+
+            if (percentToStar < 100) return;
+            wantedLevel += 1;
+            percentToStar = 0;
         }
     }
     
