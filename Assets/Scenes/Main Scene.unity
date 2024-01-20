@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 461572791}
   m_Layer: 0
-  m_Name: Brain Spawnpoint
+  m_Name: Thought Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  shouldMove: 1
 --- !u!212 &1946439598
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -637,7 +638,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.13, y: -2.62, z: 0}
-  m_LocalScale: {x: 1, y: 2.2148, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1462211857}
@@ -754,7 +755,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followers: 0
   communism: 0
-  intrusiveThoughtBoard: {fileID: 8317692788913084928, guid: baccf7744994dd54fb728cb66064d93e, type: 3}
+  intrusiveThoughtBackgroundPrefab: {fileID: 1244177508056975443, guid: 4a97ebf205fc9a74db95c03a8d39c780, type: 3}
+  intrusiveThoughtsPrefabs:
+  - {fileID: 4974669869373887019, guid: 03571916910ef504e8c6a9a41202525a, type: 3}
+  - {fileID: 5832466708425074569, guid: 6e2b8d14d177db34bbff9d3ed88ba56a, type: 3}
+  - {fileID: 8468190556887751580, guid: c82530957b539c84fa209f5b37cfade4, type: 3}
+  intrusiveThoughtSecondsTillSpawn: 0.05
+  intrusiveThoughtsMinimum: 20
+  intrusiveThoughtsMaximum: 30
   percentToStar: 0
   wantedLevel: 0
   interactionSliderPrefab: {fileID: 5830941056245889597, guid: ac52d762de7a57746bde381a87f6f97a, type: 3}

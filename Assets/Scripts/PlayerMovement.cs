@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private int speed = 5;
 
+    public bool shouldMove = true;
+
     private Vector2 direction;
     private Rigidbody2D rb; // Change to Rigibody if in 3D
     private Animator animator;
@@ -33,7 +35,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
+        if (shouldMove)
+            rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
     }
 
 }
