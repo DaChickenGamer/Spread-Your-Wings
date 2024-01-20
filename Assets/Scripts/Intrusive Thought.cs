@@ -16,7 +16,7 @@ public class IntrusiveThought : MonoBehaviour
     {
         for (int i = 0; i < 1000; i++)
         {
-            transform.position = Vector3.MoveTowards(transform.position, brain.transform.position, 0.05f);
+            transform.position = Vector3.MoveTowards(transform.position, brain.transform.position, 0.01f);
             yield return new WaitForSeconds(0.02f);
         }
     }

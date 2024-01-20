@@ -701,6 +701,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c14289c0-4d74-4872-b477-ac57b7e47465
     m_ActionName: Basic Controls/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1946439602}
+        m_TargetAssemblyTypeName: CommunismSystem, Assembly-CSharp
+        m_MethodName: OnLeftClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e487a154-721a-4e26-9d76-fefb0717ef77
+    m_ActionName: Basic Controls/Left Click[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Basic Controls

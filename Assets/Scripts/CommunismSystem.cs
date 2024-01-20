@@ -57,6 +57,21 @@ public class CommunismSystem : MonoBehaviour
     {
         _playerMovement = GetComponent<PlayerMovement>();
     }
+    public void OnLeftClick(InputAction.CallbackContext ctxt)
+    {
+        if (!ctxt.started) return;
+        var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        
+        if (hit.collider == null) return;
+        if (hit.collider.CompareTag("IntrusiveThought"))
+        {
+            Destroy(hit.collider.gameObject);
+        }
+        else
+        {
+            return;
+        }
+    }
 
     public void OnInteract(InputAction.CallbackContext ctxt)
     {

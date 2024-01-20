@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1814942553228296066}
   m_Layer: 0
   m_Name: IntrusiveThoughts2
-  m_TagString: IntrustiveThought
+  m_TagString: IntrusiveThought
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
