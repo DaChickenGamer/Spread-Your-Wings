@@ -12,8 +12,9 @@ public class Brain : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Triggered");
         if (!other.gameObject.CompareTag("IntrusiveThought")) return;
+        
+        communismSystem.chanceToSucceed -= (100 / (communismSystem.totalIntrusiveThoughts * .25f));
         communismSystem.chanceToSucceed -= (100 / (communismSystem.totalIntrusiveThoughts * .25f));
         communismSystem.totalIntrusiveThoughtsDestroyed += 1;
         communismSystem.totalIntrusiveThoughtsLeft -= 1;

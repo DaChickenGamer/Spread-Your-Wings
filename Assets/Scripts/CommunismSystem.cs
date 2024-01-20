@@ -16,6 +16,8 @@ public class CommunismSystem : MonoBehaviour
     public int communism = 0;
     
     // Intrusive Thought Minigame
+    private bool isMinigameStarted = false;
+    
     private Transform thoughtSpawnPoint;
     public GameObject intrusiveThoughtBackgroundPrefab;
     public List<GameObject> intrusiveThoughtsPrefabs;
@@ -68,13 +70,14 @@ public class CommunismSystem : MonoBehaviour
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
+        chanceToSucceed = 100;
     }
 
     private void Update()
     {
         UpdateEnemyCount();
         UpdatePercentToSucceed();
-        if ((totalIntrusiveThoughtsDestroyed >= totalIntrusiveThoughts && doneSpawningIntrusiveThoughts) || chanceToSucceed <= 0)
+        if (((totalIntrusiveThoughtsDestroyed >= totalIntrusiveThoughts && doneSpawningIntrusiveThoughts) || chanceToSucceed <= 0) && isMinigameStarted)
         {
             EndIntrusiveThoughtMinigame();
         }
@@ -92,17 +95,14 @@ public class CommunismSystem : MonoBehaviour
             totalIntrusiveThoughtsLeft -= 1;
             Destroy(hit.collider.gameObject);
         }
-        else
-        {
-            return;
-        }
     }
 
     public void OnInteract(InputAction.CallbackContext ctxt)
     {
-        if (ctxt.started && isPopulation)
+        if (ctxt.started && isPopulation && !isMinigameStarted)
         {
             StartIntrusiveThoughtMinigame();
+            isMinigameStarted = true;
         }
     }
 
@@ -160,6 +160,10 @@ public class CommunismSystem : MonoBehaviour
         _playerMovement.shouldMove = true;
         doneSpawningIntrusiveThoughts = false;
         
+        chanceToSucceed = 100;
+        totalIntrusiveThoughtsDestroyed = 0;
+        isMinigameStarted = false;
+        
         if (didPlayerSucceed <= chanceToSucceed)
         {
             followers += Random.Range(followersGainedMinimum, followersGainedMaximum);
@@ -203,7 +207,7 @@ public class CommunismSystem : MonoBehaviour
         for (int i = 0; i < 100; i++)
         {
             minigameBoard.transform.position += new Vector3(distanceToMoveX, distanceToMoveY, 0);
-            minigameBoard.transform.localScale += new Vector3(.12f, .05f, 0); // Tweak the x and y to change the size it scales to
+            minigameBoard.transform.localScale += new Vector3(.03f, .01f, 0); // Tweak the x and y to change the size it scales to
             yield return new WaitForSeconds(secondsToInfluence / 100);
         }
         StartCoroutine(SpawnIntrusiveThoughts(minigameBoard));
