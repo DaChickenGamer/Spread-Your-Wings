@@ -86,9 +86,14 @@ public class CommunismSystem : MonoBehaviour
     public void OnLeftClick(InputAction.CallbackContext ctxt)
     {
         if (!ctxt.started) return;
-        var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        
+        var intrusiveThoughtMask = LayerMask.GetMask("Intrusive Thought");
+        
+        var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, intrusiveThoughtMask);
+
         
         if (hit.collider == null) return;
+        Debug.Log(hit.collider.gameObject.name);
         if (hit.collider.CompareTag("IntrusiveThought"))
         {
             totalIntrusiveThoughtsDestroyed += 1;
@@ -207,7 +212,7 @@ public class CommunismSystem : MonoBehaviour
         for (int i = 0; i < 100; i++)
         {
             minigameBoard.transform.position += new Vector3(distanceToMoveX, distanceToMoveY, 0);
-            minigameBoard.transform.localScale += new Vector3(.03f, .01f, 0); // Tweak the x and y to change the size it scales to
+            minigameBoard.transform.localScale += new Vector3(.03f, .03f, 0); // Tweak the x and y to change the size it scales to
             yield return new WaitForSeconds(secondsToInfluence / 100);
         }
         StartCoroutine(SpawnIntrusiveThoughts(minigameBoard));
