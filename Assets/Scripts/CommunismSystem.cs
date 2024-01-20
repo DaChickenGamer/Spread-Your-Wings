@@ -93,7 +93,6 @@ public class CommunismSystem : MonoBehaviour
 
         
         if (hit.collider == null) return;
-        Debug.Log(hit.collider.gameObject.name);
         if (hit.collider.CompareTag("IntrusiveThought"))
         {
             totalIntrusiveThoughtsDestroyed += 1;
@@ -125,7 +124,6 @@ public class CommunismSystem : MonoBehaviour
         if(other.CompareTag("Population"))
         {
             isPopulation = false;
-            thoughtSpawnPoint = null;
         }
     }
 
@@ -173,9 +171,13 @@ public class CommunismSystem : MonoBehaviour
         {
             followers += Random.Range(followersGainedMinimum, followersGainedMaximum);
             communism += Random.Range(communisumGainedMinimum, communismGainedMaximum);
+            
+            thoughtSpawnPoint.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.red;
+            Destroy(thoughtSpawnPoint.transform.GetChild(0).gameObject);
         }
         else
         {
+            return; // Temp till the system gets added
             var amountToIncreaseStar = Random.Range(percentToStarIncreaseMinimum, percentToStarIncreaseMaximum);
             
             percentToStar += amountToIncreaseStar;
