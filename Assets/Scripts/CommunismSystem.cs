@@ -16,6 +16,10 @@ public class CommunismSystem : MonoBehaviour
     public int communism = 0;
     
     // Intrusive Thought Minigame
+    [Header("Intrusive Thought Minigame Prefabs")]
+    [SerializeField] private GameObject followersGainedPrefab;
+    [SerializeField] private GameObject communismGainedPrefab;
+    
     private bool isMinigameStarted = false;
     
     private Transform thoughtSpawnPoint;
@@ -24,12 +28,15 @@ public class CommunismSystem : MonoBehaviour
     
     private GameObject minigameBoard;
     
+    [Header("Intrusive Thought Minigame Random Values")]
+    
     public float intrusiveThoughtSecondsTillSpawn = .1f; 
     public int intrusiveThoughtsMinimum = 20;
     public int intrusiveThoughtsMaximum = 30;
 
+    [Header("Intrusive Thought Minigame Tracker")]
+    
     public int totalIntrusiveThoughts = -1;
-
     public int totalIntrusiveThoughtsLeft;
     
     public float chanceToSucceed = 100;
@@ -38,7 +45,7 @@ public class CommunismSystem : MonoBehaviour
     
     private bool doneSpawningIntrusiveThoughts = false;
     
-    // Wanted System
+    [Header("Wanted System")]
     
     public int percentToStar = 0;
     public int wantedLevel = 0;
@@ -46,7 +53,7 @@ public class CommunismSystem : MonoBehaviour
     // Increase when in certain areas
     private int percentToStarIncreaseMinimum = 1;
     private int percentToStarIncreaseMaximum = 5;
-
+    
     private int forgetPercent; // Percent chance to forget about the player
     // Goes down every person to talk to
     
@@ -58,6 +65,8 @@ public class CommunismSystem : MonoBehaviour
     private int followersGainedMaximum = 3;
     private int communisumGainedMinimum = 10;
     private int communismGainedMaximum = 20;
+    
+    private Collider2D _populationCollider;
 
     private PlayerMovement _playerMovement;
     
@@ -66,13 +75,13 @@ public class CommunismSystem : MonoBehaviour
     [SerializeField] private GameObject interactionSliderPrefab;
 
     public GameObject middleOfScreenPoint;
-
+    
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         chanceToSucceed = 100;
     }
-
+    bool isTestLoopDone = false;
     private void Update()
     {
         UpdateEnemyCount();
@@ -103,7 +112,7 @@ public class CommunismSystem : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext ctxt)
     {
-        if (ctxt.started && isPopulation && !isMinigameStarted)
+        if (ctxt.started && isPopulation && !isMinigameStarted && _populationCollider.CompareTag("Population"))
         {
             StartIntrusiveThoughtMinigame();
             isMinigameStarted = true;
@@ -116,6 +125,7 @@ public class CommunismSystem : MonoBehaviour
         {
             isPopulation = true;
             thoughtSpawnPoint = other.gameObject.transform.GetComponentInChildren<Transform>();
+            _populationCollider = other;
         }
     }
 
@@ -157,27 +167,39 @@ public class CommunismSystem : MonoBehaviour
     }
     private void EndIntrusiveThoughtMinigame()
     {
-        int didPlayerSucceed = Random.Range(0, 100);
         
         Destroy(minigameBoard);
         _playerMovement.shouldMove = true;
         doneSpawningIntrusiveThoughts = false;
         
-        chanceToSucceed = 100;
         totalIntrusiveThoughtsDestroyed = 0;
         isMinigameStarted = false;
+
+        if (chanceToSucceed <= 0)
+        {
+            chanceToSucceed = 100;
+            return;
+        }
+        
+        thoughtSpawnPoint.tag = "Untagged";
+        int didPlayerSucceed = Random.Range(0, 100);
         
         if (didPlayerSucceed <= chanceToSucceed)
         {
-            followers += Random.Range(followersGainedMinimum, followersGainedMaximum);
-            communism += Random.Range(communisumGainedMinimum, communismGainedMaximum);
+            var followersGained = Random.Range(followersGainedMinimum, followersGainedMaximum);
+            var communismGained = Random.Range(communisumGainedMinimum, communismGainedMaximum);
+            followers += followersGained;
+            communism += communismGained;
+
+            StartCoroutine(ShowResourcesGained(followersGained, communismGained));
             
             thoughtSpawnPoint.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.red;
             Destroy(thoughtSpawnPoint.transform.GetChild(0).gameObject);
         }
         else
         {
-            return; // Temp till the system gets added
+            Debug.Log("Wanted System Not Implemented Yet"); // Temp till the system gets added
+            /*
             var amountToIncreaseStar = Random.Range(percentToStarIncreaseMinimum, percentToStarIncreaseMaximum);
             
             percentToStar += amountToIncreaseStar;
@@ -185,9 +207,10 @@ public class CommunismSystem : MonoBehaviour
             if (percentToStar < 100) return;
             wantedLevel += 1;
             percentToStar = 0;
+            */
         }
+        chanceToSucceed = 100;
     }
-    
     private IEnumerator SpawnIntrusiveThoughts(GameObject minigameBoard)
     {
         totalIntrusiveThoughts = Random.Range(intrusiveThoughtsMinimum, intrusiveThoughtsMaximum);
@@ -218,5 +241,46 @@ public class CommunismSystem : MonoBehaviour
             yield return new WaitForSeconds(secondsToInfluence / 100);
         }
         StartCoroutine(SpawnIntrusiveThoughts(minigameBoard));
+    }
+
+    private IEnumerator ShowResourcesGained(int followersGained, int communismGained)
+    { ;
+        GameObject followersGainedText = Instantiate(followersGainedPrefab, 
+            new Vector3(
+                RandomRangeExcludeValue(_populationCollider.bounds.min.x * .87f, _populationCollider.bounds.min.x * .95f, _populationCollider.bounds.max.x * 1.2f, _populationCollider.bounds.max.x * .95f), 
+                Random.Range(_populationCollider.bounds.min.y + (.5f * (_populationCollider.bounds.max.y - _populationCollider.bounds.min.y)), _populationCollider.bounds.max.y + (-.2f*(_populationCollider.bounds.max.y - _populationCollider.bounds.min.y))),
+                0),
+            Quaternion.Euler(0, 0, Random.Range(-30, 30)));
+        
+        
+        GameObject communismGainedText = Instantiate(communismGainedPrefab, 
+            new Vector3(
+                RandomRangeExcludeValue(_populationCollider.bounds.min.x * .87f, _populationCollider.bounds.min.x * .95f, _populationCollider.bounds.max.x * 1.2f, _populationCollider.bounds.max.x * .95f), 
+                Random.Range(_populationCollider.bounds.min.y + (.5f * (_populationCollider.bounds.max.y - _populationCollider.bounds.min.y)), _populationCollider.bounds.max.y + (-.2f*(_populationCollider.bounds.max.y - _populationCollider.bounds.min.y))),
+                0),
+            Quaternion.Euler(0, 0, Random.Range(-30, 30)));
+        
+        followersGainedText.GetComponentInChildren<TextMeshProUGUI>().text = "+" + followersGained;
+        communismGainedText.GetComponentInChildren<TextMeshProUGUI>().text = "+" + communismGained;
+        yield return new WaitForSeconds(5);
+        Destroy(followersGainedText);
+        Destroy(communismGainedText);
+    }
+
+    private float RandomRangeExcludeValue(float lowestValue1, float highestValue1, float lowestValue2, float highestValue2)
+    {
+        float randomRange1 = Random.Range(lowestValue1, highestValue1);
+        float randomRange2 = Random.Range(lowestValue2, highestValue2);
+        
+        int randomNum = Random.Range(0, 2);
+        
+        if (randomNum == 0)
+        {
+            return randomRange1;
+        }
+        else
+        {
+            return randomRange2;
+        }
     }
 }
