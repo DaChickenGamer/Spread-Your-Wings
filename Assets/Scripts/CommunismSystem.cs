@@ -63,7 +63,7 @@ public class CommunismSystem : MonoBehaviour
     // Rewards From Dialogue
     private int followersGainedMinimum = 1;
     private int followersGainedMaximum = 3;
-    private int communisumGainedMinimum = 10;
+    private int communismGainedMinimum = 10;
     private int communismGainedMaximum = 20;
     
     private Collider2D _populationCollider;
@@ -188,7 +188,7 @@ public class CommunismSystem : MonoBehaviour
             thoughtSpawnPoint.tag = "Untagged";
             
             var followersGained = Random.Range(followersGainedMinimum, followersGainedMaximum);
-            var communismGained = Random.Range(communisumGainedMinimum, communismGainedMaximum);
+            var communismGained = Random.Range(communismGainedMinimum, communismGainedMaximum);
             followers += followersGained;
             communism += communismGained;
 
@@ -217,20 +217,22 @@ public class CommunismSystem : MonoBehaviour
         totalIntrusiveThoughts = Random.Range(intrusiveThoughtsMinimum, intrusiveThoughtsMaximum);
         totalIntrusiveThoughtsLeft = totalIntrusiveThoughts;
         Transform spawnPoints = minigameBoard.transform.Find("Spawn Points");
-        List<Transform> intrusiveThoughts = new List<Transform>();
-        //Transform removedSpawnPoint;
+        List<Transform> intrusiveThoughtsSpawnpoints = new List<Transform>();
+        
+        Transform lastSpawnPoint = null;
         foreach (Transform intrusiveThoughtSpawnPoint in spawnPoints.transform.GetComponentInChildren<Transform>())
         {
-            intrusiveThoughts.Add(intrusiveThoughtSpawnPoint);
+            intrusiveThoughtsSpawnpoints.Add(intrusiveThoughtSpawnPoint);
         }
         for (int i = 0; i < totalIntrusiveThoughts; i++)
         {
-            int randomSpawnPoint = Random.Range(0, intrusiveThoughts.Count);
+            int randomSpawnPoint = Random.Range(0, intrusiveThoughtsSpawnpoints.Count);
             int randomIntrusiveThought = Random.Range(0, intrusiveThoughtsPrefabs.Count);
-            //removedSpawnPoint = intrusiveThoughts[randomSpawnPoint];
-            //intrusiveThoughts.Remove(removedSpawnPoint);
-            GameObject intrusiveThought = Instantiate(intrusiveThoughtsPrefabs[randomIntrusiveThought], intrusiveThoughts[randomSpawnPoint]);
-            //intrusiveThoughts.Add(removedSpawnPoint);
+            
+            GameObject intrusiveThought = Instantiate(intrusiveThoughtsPrefabs[randomIntrusiveThought], intrusiveThoughtsSpawnpoints[randomSpawnPoint]);
+            
+            if (chanceToSucceed <= 0) break;
+            
             yield return new WaitForSeconds(intrusiveThoughtSecondsTillSpawn);
         }
         
