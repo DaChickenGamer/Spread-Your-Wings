@@ -181,11 +181,12 @@ public class CommunismSystem : MonoBehaviour
             return;
         }
         
-        thoughtSpawnPoint.tag = "Untagged";
         int didPlayerSucceed = Random.Range(0, 100);
         
         if (didPlayerSucceed <= chanceToSucceed)
         {
+            thoughtSpawnPoint.tag = "Untagged";
+            
             var followersGained = Random.Range(followersGainedMinimum, followersGainedMaximum);
             var communismGained = Random.Range(communisumGainedMinimum, communismGainedMaximum);
             followers += followersGained;
@@ -217,6 +218,7 @@ public class CommunismSystem : MonoBehaviour
         totalIntrusiveThoughtsLeft = totalIntrusiveThoughts;
         Transform spawnPoints = minigameBoard.transform.Find("Spawn Points");
         List<Transform> intrusiveThoughts = new List<Transform>();
+        //Transform removedSpawnPoint;
         foreach (Transform intrusiveThoughtSpawnPoint in spawnPoints.transform.GetComponentInChildren<Transform>())
         {
             intrusiveThoughts.Add(intrusiveThoughtSpawnPoint);
@@ -225,7 +227,10 @@ public class CommunismSystem : MonoBehaviour
         {
             int randomSpawnPoint = Random.Range(0, intrusiveThoughts.Count);
             int randomIntrusiveThought = Random.Range(0, intrusiveThoughtsPrefabs.Count);
+            //removedSpawnPoint = intrusiveThoughts[randomSpawnPoint];
+            //intrusiveThoughts.Remove(removedSpawnPoint);
             GameObject intrusiveThought = Instantiate(intrusiveThoughtsPrefabs[randomIntrusiveThought], intrusiveThoughts[randomSpawnPoint]);
+            //intrusiveThoughts.Add(removedSpawnPoint);
             yield return new WaitForSeconds(intrusiveThoughtSecondsTillSpawn);
         }
         
