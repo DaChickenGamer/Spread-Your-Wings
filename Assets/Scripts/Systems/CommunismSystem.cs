@@ -18,6 +18,10 @@ public class CommunismSystem : MonoBehaviour
     public int followerMultiplier = 1;
     private bool isUpdatingFollowers = false;
     
+    // Fame Stats
+    public int fameIncreaseMinimum = 1;
+    public int fameIncreaseMaximum = 5;
+    
     // Intrusive Thought Minigame
     [Header("Intrusive Thought Minigame Prefabs")]
     [SerializeField] private GameObject followersGainedPrefab;
@@ -57,9 +61,6 @@ public class CommunismSystem : MonoBehaviour
     //private int percentToStarIncreaseMinimum = 1;
     //private int percentToStarIncreaseMaximum = 5;
     
-    private int forgetPercent; // Percent chance to forget about the player
-    // Goes down every person to talk to
-    
     // Interaction Stats 
     private float secondsToInfluence = 2f;
     
@@ -72,6 +73,7 @@ public class CommunismSystem : MonoBehaviour
     private Collider2D _populationCollider;
 
     private PlayerMovement _playerMovement;
+    private FameSystem _fameSystem;
     
     private bool isPopulation = false;
     
@@ -83,6 +85,7 @@ public class CommunismSystem : MonoBehaviour
     {
         _playerMovement = GetComponent<PlayerMovement>();
         chanceToSucceed = 100;
+        _fameSystem = FindObjectOfType<FameSystem>();
     }
     private void Update()
     {
@@ -212,6 +215,8 @@ public class CommunismSystem : MonoBehaviour
             followers += followersGained;
             communism += communismGained;
 
+            _fameSystem.GainFame(Random.Range(fameIncreaseMinimum, fameIncreaseMaximum));
+            
             StartCoroutine(ShowResourcesGained(followersGained, communismGained));
             
             thoughtSpawnPoint.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.red;
