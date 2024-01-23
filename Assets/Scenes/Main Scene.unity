@@ -982,6 +982,7 @@ GameObject:
   - component: {fileID: 1119675595}
   - component: {fileID: 1119675594}
   - component: {fileID: 1119675597}
+  - component: {fileID: 1119675598}
   m_Layer: 0
   m_Name: Main Canvas
   m_TagString: Untagged
@@ -1103,6 +1104,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1119675598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119675592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a9dae43e4e6a04b8778d99d75ca02f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  communismText: {fileID: 36348185}
+  followersText: {fileID: 1180380077}
 --- !u!1 &1180380075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1130,7 @@ GameObject:
   - component: {fileID: 1180380078}
   - component: {fileID: 1180380077}
   m_Layer: 5
-  m_Name: CommunismPointsDisplay
+  m_Name: FollowerPointsDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2628,8 +2643,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d4579d3b4c05643bd3f708cd2ee50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followers: 0
-  communism: 0
   followerMultiplier: 1
   followersGainedPrefab: {fileID: 4549721107982566566, guid: f913c27bb4c7a21498cdf76530b1fddd, type: 3}
   communismGainedPrefab: {fileID: 2030286335490212714, guid: 42803b3de323d3c4cbe72727a55a749c, type: 3}

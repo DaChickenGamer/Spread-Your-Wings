@@ -11,8 +11,8 @@ using Random = UnityEngine.Random;
 
 public class CommunismSystem : MonoBehaviour
 {
-    public int followers = 0;
-    public int communism = 0;
+    private int followers = 0;
+    private int communism = 0;
     
     // Follow Stats
     public int followerMultiplier = 1;
@@ -54,8 +54,8 @@ public class CommunismSystem : MonoBehaviour
     public int wantedLevel = 0;
     
     // Increase when in certain areas
-    private int percentToStarIncreaseMinimum = 1;
-    private int percentToStarIncreaseMaximum = 5;
+    //private int percentToStarIncreaseMinimum = 1;
+    //private int percentToStarIncreaseMaximum = 5;
     
     private int forgetPercent; // Percent chance to forget about the player
     // Goes down every person to talk to
@@ -84,7 +84,6 @@ public class CommunismSystem : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
         chanceToSucceed = 100;
     }
-    bool isTestLoopDone = false;
     private void Update()
     {
         UpdateEnemyCount();
@@ -97,6 +96,14 @@ public class CommunismSystem : MonoBehaviour
         }
     }
 
+    public int GetCommunism()
+    {
+        return communism;
+    }
+    public int GetFollowers()
+    {
+        return followers;
+    }
     public void OnLeftClick(InputAction.CallbackContext ctxt)
     {
         if (!ctxt.started) return;
@@ -232,7 +239,6 @@ public class CommunismSystem : MonoBehaviour
         Transform spawnPoints = minigameBoard.transform.Find("Spawn Points");
         List<Transform> intrusiveThoughtsSpawnpoints = new List<Transform>();
         
-        Transform lastSpawnPoint = null;
         foreach (Transform intrusiveThoughtSpawnPoint in spawnPoints.transform.GetComponentInChildren<Transform>())
         {
             intrusiveThoughtsSpawnpoints.Add(intrusiveThoughtSpawnPoint);
