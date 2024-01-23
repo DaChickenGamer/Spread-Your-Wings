@@ -12,8 +12,11 @@ using Random = UnityEngine.Random;
 public class CommunismSystem : MonoBehaviour
 {
     public int followers = 0;
-
     public int communism = 0;
+    
+    // Follow Stats
+    public int followerMultiplier = 1;
+    private bool isUpdatingFollowers = false;
     
     // Intrusive Thought Minigame
     [Header("Intrusive Thought Minigame Prefabs")]
@@ -86,6 +89,8 @@ public class CommunismSystem : MonoBehaviour
     {
         UpdateEnemyCount();
         UpdatePercentToSucceed();
+        if (!isUpdatingFollowers)
+            StartCoroutine(FollowerIncome());
         if (((totalIntrusiveThoughtsDestroyed >= totalIntrusiveThoughts && doneSpawningIntrusiveThoughts) || chanceToSucceed <= 0) && isMinigameStarted)
         {
             EndIntrusiveThoughtMinigame();
@@ -137,6 +142,14 @@ public class CommunismSystem : MonoBehaviour
         }
     }
 
+    private IEnumerator FollowerIncome()
+    {
+        isUpdatingFollowers = true;
+        yield return new WaitForSeconds(60);
+        communism += followers * followerMultiplier;
+        isUpdatingFollowers = false;
+    }
+    
     private void UpdateEnemyCount()
     {
         if (GameObject.Find("Enemy Counter") == null) return;

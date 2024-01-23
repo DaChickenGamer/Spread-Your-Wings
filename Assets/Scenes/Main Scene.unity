@@ -355,8 +355,12 @@ MonoBehaviour:
   percentToStarIncreaseMaximum: 0
   firstWaveMinimumEnemyCount: 1
   firstWaveMaximumEnemyCount: 5
+  enemySpawnIncreaseMinimum: 1.25
+  enemySpawnIncreaseMaximum: 2
+  enemiesKilled: 0
   antiCommunistList:
   - {fileID: 3241332368447597064, guid: cd0cd128d019d5149bc333f31a1d46aa, type: 3}
+  CurrentEnemyCount: 0
 --- !u!1 &1404892528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followers: 0
   communism: 0
+  followerMultiplier: 1
   followersGainedPrefab: {fileID: 4549721107982566566, guid: f913c27bb4c7a21498cdf76530b1fddd, type: 3}
   communismGainedPrefab: {fileID: 2030286335490212714, guid: 42803b3de323d3c4cbe72727a55a749c, type: 3}
   intrusiveThoughtBackgroundPrefab: {fileID: 1244177508056975443, guid: 4a97ebf205fc9a74db95c03a8d39c780, type: 3}

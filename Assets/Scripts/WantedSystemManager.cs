@@ -12,7 +12,7 @@ public class WantedSystemManager : MonoBehaviour
     public int firstWaveMinimumEnemyCount = 1;
     public int firstWaveMaximumEnemyCount = 5;
 
-    public float enemySpawnIncreaseMinimum = 1.25;
+    public float enemySpawnIncreaseMinimum = 1.25f;
     public float enemySpawnIncreaseMaximum = 2;
 
     private int currentWave = 1;
