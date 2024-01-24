@@ -1279,6 +1279,7 @@ GameObject:
   - component: {fileID: 1119675594}
   - component: {fileID: 1119675597}
   - component: {fileID: 1119675598}
+  - component: {fileID: 1119675599}
   m_Layer: 0
   m_Name: Main Canvas
   m_TagString: Untagged
@@ -1414,6 +1415,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   communismText: {fileID: 36348185}
   followersText: {fileID: 1180380077}
+--- !u!114 &1119675599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119675592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6a410a86c2e4a4291a89039e84ffc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fameBarAnimation: {fileID: 2123687893}
+  slider: {fileID: 1877995026}
 --- !u!1 &1180380075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,6 +1927,7 @@ GameObject:
   - component: {fileID: 1448773761}
   - component: {fileID: 1448773760}
   - component: {fileID: 1448773763}
+  - component: {fileID: 1448773764}
   m_Layer: 5
   m_Name: FollowerUI
   m_TagString: Untagged
@@ -2020,7 +2036,96 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1119675599}
+          m_TargetAssemblyTypeName: UI, Assembly-CSharp
+          m_MethodName: ShowFameBar
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1119675599}
+          m_TargetAssemblyTypeName: UI, Assembly-CSharp
+          m_MethodName: HideFameBar
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1119675599}
+          m_TargetAssemblyTypeName: UI, Assembly-CSharp
+          m_MethodName: ShowFameBar
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!61 &1448773764
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448773758}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 84, y: 32}
+  m_EdgeRadius: 0
 --- !u!1 &1462211854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,7 +2778,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1877995025}
   - component: {fileID: 1877995026}
-  - component: {fileID: 1877995027}
   m_Layer: 5
   m_Name: ProgressBar
   m_TagString: Untagged
@@ -2754,19 +2858,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1877995027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877995024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a6a410a86c2e4a4291a89039e84ffc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 1877995026}
 --- !u!1 &1946439594
 GameObject:
   m_ObjectHideFlags: 0
