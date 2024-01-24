@@ -49,13 +49,15 @@ public class EggHatching : MonoBehaviour
             EndHatching();
             return;
         }
-
+        
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.eggHatching, this.transform.position);
         currentEgg.GetComponent<SpriteRenderer>().sprite = eggStages[currentEggStage];
         currentEggStage += 1;
     }
     
     private void EndHatching()
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.eggHatching, this.transform.position);
         playerMovement.shouldMove = true;
         Destroy(currentEgg);
     }
