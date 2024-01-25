@@ -2,16 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
-using FMOD.Studio;
-using Unity.VisualScripting;
+//using FMODUnity;
+//using FMOD.Studio;
 
 public class AudioManager : MonoBehaviour
 {
     /*
+        Broken Code atm
+    
+    
         Time stamp for the youtube video I was watching:
         https://www.youtube.com/watch?v=rcBHIOjZDpk&t=679s
-     */
+     
     
     private List<EventInstance> eventInstances;
     public static AudioManager instance {get; private set;}
@@ -53,4 +55,5 @@ public class AudioManager : MonoBehaviour
     {
         CleanUp();
     }
+    */
 }

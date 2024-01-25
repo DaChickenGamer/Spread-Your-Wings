@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using FMOD.Studio;
-using Unity.VisualScripting;
+//using FMOD.Studio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     
     // Music Loop Test ( DELETE LATER )
-    private EventInstance testLoop;
+    //private EventInstance testLoop;
 
     private void Awake()
     {
@@ -44,35 +43,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        testLoop = AudioManager.instance.CreateInstance(FMODEvents.instance.testLoop);
+        //testLoop = AudioManager.instance.CreateInstance(FMODEvents.instance.testLoop);
     }
 
     // TEST DELETE LATER
-    private void UpdateSound()
-    {
+    //private void UpdateSound()
+    //{
         // start the test loop event if the player has an x velocity
-        if (rb.velocity.x != 0)
-        {
+        //if (rb.velocity.x != 0)
+        //{
             // get the playback state
-            PLAYBACK_STATE playerbackState;
-            testLoop.getPlaybackState(out playerbackState);
+            //PLAYBACK_STATE playerbackState;
+            //testLoop.getPlaybackState(out playerbackState);
 
-            if (playerbackState.Equals(PLAYBACK_STATE.STOPPED))
-            {
-                testLoop.start();
-            }
+            //if (playerbackState.Equals(PLAYBACK_STATE.STOPPED))
+            //{
+            //    testLoop.start();
+            //}
 
-        }
+        //}
         // other stop the foot steps event
-        else
-        {
-            testLoop.stop(STOP_MODE.ALLOWFADEOUT);
-        }
-    }
+        //else
+        //{
+        //    testLoop.stop(STOP_MODE.ALLOWFADEOUT);
+        //}
+    //}
 
     private void Update()
     {
-        UpdateSound();
+        //UpdateSound();
         
         if (shouldMove)
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);

@@ -1,16 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using FMODUnity;
+//using FMODUnity;
 using UnityEngine;
 
 public class FMODEvents : MonoBehaviour
 {
     [field: Header("Test Loop")]
-    [field: SerializeField] public EventReference testLoop { get; private set; }
+    //[field: SerializeField] public EventReference testLoop { get; private set; }
     
     [field: Header("Egg Hatching SFX")] 
-    [field: SerializeField] public EventReference eggHatching { get; private set; }
+    //[field: SerializeField] public EventReference eggHatching { get; private set; }
     
     public static FMODEvents instance { get; private set; }
 
