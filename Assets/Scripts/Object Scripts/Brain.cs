@@ -14,8 +14,8 @@ public class Brain : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("IntrusiveThought")) return;
         
-        communismSystem.chanceToSucceed -= (100 / (communismSystem.totalIntrusiveThoughts * .25f));
-        communismSystem.chanceToSucceed -= (100 / (communismSystem.totalIntrusiveThoughts * .25f));
+        communismSystem.chanceToSucceed -= (100 / (communismSystem.totalIntrusiveThoughts));
+        communismSystem.chanceToSucceed -= (100 / (communismSystem.totalIntrusiveThoughts));
         communismSystem.totalIntrusiveThoughtsDestroyed += 1;
         communismSystem.totalIntrusiveThoughtsLeft -= 1;
         Destroy(other.gameObject);
