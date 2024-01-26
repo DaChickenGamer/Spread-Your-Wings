@@ -2368,6 +2368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillLevels: 
   SkillCaps: 
+  SkillCost: 
   SkillNames: []
   SkillDescriptions: []
   SkillList: []
@@ -4102,6 +4103,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0839272d522f1904989771419f6f6b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <testLoop>k__BackingField:
+    Guid:
+      Data1: -878263278
+      Data2: 1223776954
+      Data3: 854597817
+      Data4: -990890610
+    Path: event:/SFX/Test/Loop Test
+  <eggHatching>k__BackingField:
+    Guid:
+      Data1: -1116957094
+      Data2: 1290618234
+      Data3: 911559605
+      Data4: -2059760364
+    Path: event:/Egg Hatch 1
 --- !u!1 &1640443604
 GameObject:
   m_ObjectHideFlags: 0
