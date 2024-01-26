@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -16,7 +17,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI communismText;
     [SerializeField] private TextMeshProUGUI followersText;
     
+    [SerializeField] private TextMeshProUGUI thanksForPlayingText;
+    
+    private bool timeRunning = true;
+    
     public static UIManager instance { get; private set; }
+
+    private int hours, minutes, seconds;
     
     private void Awake()
     {
@@ -38,6 +45,18 @@ public class UIManager : MonoBehaviour
     {
         UpdateCommunismText();
         UpdateFollowersText();
+    }
+    
+    public void ShowThanksForPlayingPanel()
+    {
+        thanksForPlayingText.text = "Time Beat: " + hours.ToString("00") + ":" + minutes.ToString("00") + ":" + seconds.ToString("00");
+        thanksForPlayingText.transform.parent.gameObject.SetActive(true);
+        timeRunning = false;
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void UpdateCommunismText()
@@ -73,12 +92,6 @@ public class UIManager : MonoBehaviour
     public IEnumerator GameTimer()
     {
         TextMeshProUGUI timerText = timerPanel.GetComponentInChildren<TextMeshProUGUI>();
-
-        int hours = 0;
-        int minutes = 0;
-        int seconds = 0;
-        
-        bool timeRunning = true;
         
         while (timeRunning)
         {

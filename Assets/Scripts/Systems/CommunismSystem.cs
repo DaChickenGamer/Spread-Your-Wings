@@ -17,7 +17,7 @@ public class CommunismSystem : MonoBehaviour
     // Add a instance later
     
     private int followers = 0;
-    private int communism = 0;
+    private int communism = 190;
     
     // Follow Stats
     public int followerMultiplier = 1;
@@ -121,9 +121,10 @@ public class CommunismSystem : MonoBehaviour
         UIManager.instance.SetProgress(communism, communismPercentFilled);
         UIManager.instance.SetMaxProgress(communsimRequiredForLevelingUp);
     }
-    public void CheckForLevelUp()
+    private void CheckForLevelUp()
     {
         if (communism < communsimRequiredForLevelingUp) return;
+        UIManager.instance.ShowThanksForPlayingPanel();
     }
     public int GetCommunism()
     {
