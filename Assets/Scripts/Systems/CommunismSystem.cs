@@ -34,7 +34,7 @@ public class CommunismSystem : MonoBehaviour
     
     private bool isMinigameStarted = false;
     
-    private Transform thoughtSpawnPoint;
+    private Transform currentBird;
     public GameObject intrusiveThoughtBackgroundPrefab;
     public List<GameObject> intrusiveThoughtsPrefabs;
     
@@ -148,9 +148,7 @@ public class CommunismSystem : MonoBehaviour
 
         
         if (hit.collider == null) return;
-
-        Debug.Log(hit.collider.name);
-
+        
         if (hit.collider.CompareTag("IntrusiveThought"))
         {
             totalIntrusiveThoughtsDestroyed += 1;
@@ -173,7 +171,7 @@ public class CommunismSystem : MonoBehaviour
         if(other.CompareTag("Population"))
         {
             isPopulation = true;
-            thoughtSpawnPoint = other.gameObject.transform.GetComponentInChildren<Transform>();
+            currentBird = other.gameObject.transform.GetComponentInChildren<Transform>();
             _populationCollider = other;
         }
     }
@@ -212,7 +210,7 @@ public class CommunismSystem : MonoBehaviour
     
     private void StartIntrusiveThoughtMinigame()
     {
-        minigameBoard = Instantiate(intrusiveThoughtBackgroundPrefab, thoughtSpawnPoint);
+        minigameBoard = Instantiate(intrusiveThoughtBackgroundPrefab, currentBird);
         
         _playerMovement.shouldMove = false;
 
@@ -242,7 +240,7 @@ public class CommunismSystem : MonoBehaviour
         
         if (didPlayerSucceed <= chanceToSucceed)
         {
-            thoughtSpawnPoint.tag = "Untagged";
+            currentBird.tag = "Untagged";
             
             var followersGained = Random.Range(followersGainedMinimum, followersGainedMaximum);
             var communismGained = Random.Range(communismGainedMinimum, communismGainedMaximum);
@@ -252,10 +250,13 @@ public class CommunismSystem : MonoBehaviour
             _fameSystem.GainFame(Random.Range(fameIncreaseMinimum, fameIncreaseMaximum));
             
             StartCoroutine(ShowResourcesGained(followersGained, communismGained));
+
+            Debug.Log(currentBird.name);
             
-            thoughtSpawnPoint.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.red;
-            thoughtSpawnPoint.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
-            Destroy(thoughtSpawnPoint.transform.GetChild(0).gameObject);
+            currentBird.GetComponent<SpriteRenderer>().color = Color.red;
+            currentBird.transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.red;
+            
+            Destroy(currentBird.transform.GetChild(0).gameObject);
         }
         else
         {
