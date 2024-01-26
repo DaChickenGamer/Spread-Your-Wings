@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     
     public void GameOver(string gameOverMessage)
     {
-        Debug.Log(gameOverMessage);
+       // Debug.Log(gameOverMessage);
     }
 
     public void NewGameButton()

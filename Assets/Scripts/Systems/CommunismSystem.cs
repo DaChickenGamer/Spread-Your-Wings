@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 public class CommunismSystem : MonoBehaviour
 {
     private int communsimRequiredForLevelingUp = 200;
-    [SerializeField] private GameObject levelUpPrefab;
+    //[SerializeField] private GameObject levelUpPrefab;
     
     // Add a instance later
     

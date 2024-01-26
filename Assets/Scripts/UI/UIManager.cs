@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI followersText;
     
     [SerializeField] private TextMeshProUGUI thanksForPlayingText;
+    [SerializeField] private GameObject ingameMenuPanel;
     
     private bool timeRunning = true;
     
@@ -50,11 +51,19 @@ public class UIManager : MonoBehaviour
             UpdateFollowersText();
         }
     }
-    
+    public void ShowIngameMenuPanel()
+    {
+        Debug.Log("Working");
+        ingameMenuPanel.SetActive(true);
+    }
+    public void HideIngameMenuPanel()
+    {
+        ingameMenuPanel.SetActive(false);
+    }
     public void ShowThanksForPlayingPanel()
     {
         thanksForPlayingText.text = "Time Beat: " + hours.ToString("00") + ":" + minutes.ToString("00") + ":" + seconds.ToString("00");
-        thanksForPlayingText.transform.parent.gameObject.SetActive(true);
+        thanksForPlayingText.transform.parent.parent.gameObject.SetActive(true);
         timeRunning = false;
     }
 
@@ -62,7 +71,7 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-    public void OnQuitButtonClicked()
+    public void ExitGame()
     {
         Application.Quit();
     }
