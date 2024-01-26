@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{b00af3a9-954a-4021-9157-2365e10e25cb}">
+		<property name="assetPath">
+			<value>egg hatch 1.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.79200000000000004</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ec6acd40-61fe-459b-ab8c-d7eae4b0bf4c}</destination>
+		</relationship>
+	</object>
+</objects>
