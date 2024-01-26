@@ -15,6 +15,7 @@ public class SkillTree : MonoBehaviour
 
     public int[] SkillLevels;
     public int[] SkillCaps;
+    public int[] SkillCost;
     public string[] SkillNames;
     public string[] SkillDescriptions;
 
@@ -43,7 +44,9 @@ public class SkillTree : MonoBehaviour
         SkillLevels = new int[6];
         // Maybe make it into a SO and load it from there later
         SkillCaps = new[] {1, 5, 5, 2, 10, 10};
-        
+
+        SkillCost = new[] { 20, 10, 5, 20, 10, 5 };
+            
         SkillNames = new[] {"Strength", "Intelligence", "Charisma", "Luck", "Speed", "Endurance"};
         
         SkillDescriptions = new[]

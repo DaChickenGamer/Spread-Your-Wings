@@ -17,7 +17,7 @@ public class CommunismSystem : MonoBehaviour
     // Add a instance later
     
     private int followers = 0;
-    private int communism = 0;
+    private int communism = 500;
     
     // Follow Stats
     public int followerMultiplier = 1;
@@ -129,6 +129,10 @@ public class CommunismSystem : MonoBehaviour
     public int GetCommunism()
     {
         return communism;
+    }
+    public void RemoveCommunism(int communismToRemove)
+    {
+        communism -= communismToRemove;
     }
     public int GetFollowers()
     {

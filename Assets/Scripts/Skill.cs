@@ -16,11 +16,11 @@ public class Skill : MonoBehaviour
 
     public void UpdateUI()
     {
-        TitleText.text = $"{skillTree.SkillNames[id]}/{skillTree.SkillCaps[id]}\n\n{skillTree.SkillNames[id]}";
-        DescriptionText.text = $"{skillTree.SkillDescriptions[id]}\nCost: {skillTree.skillTreeComunismCost} Communism"; // Add cost system later
+        TitleText.text = $"{skillTree.SkillLevels[id]}/{skillTree.SkillCaps[id]}\n\n{skillTree.SkillNames[id]}";
+        DescriptionText.text = $"{skillTree.SkillDescriptions[id]}\nCost: {skillTree.SkillCost[id]} Communism"; // Add cost system later
 
         GetComponent<Image>().color = skillTree.SkillLevels[id] >= skillTree.SkillCaps[id] ? Color.yellow : //Checks if maxed
-            skillTree.skillTreeComunismCost > 0 ? Color.green : Color.white; // Checks if can be bought
+            CommunismSystem.instance.GetCommunism() > skillTree.SkillCost[id] ? Color.green : new Color(149, 149, 149); // Checks if can be bought
 
         foreach (var connectedSkill in ConnectedSkills)
         {
@@ -31,8 +31,9 @@ public class Skill : MonoBehaviour
 
     public void Buy()
     {
-        if (skillTree.skillTreeComunismCost < 1 || skillTree.SkillLevels[id] >= skillTree.SkillCaps[id]) return;
+        if (CommunismSystem.instance.GetCommunism() < skillTree.SkillCost[id] || skillTree.SkillLevels[id] >= skillTree.SkillCaps[id]) return;
         
+        CommunismSystem.instance.RemoveCommunism(skillTree.SkillCost[id]);
         skillTree.skillTreeComunismCost -= 1; // Change to cost later
         skillTree.SkillLevels[id] += 1;
         skillTree.UpdateAllSkillUI();
