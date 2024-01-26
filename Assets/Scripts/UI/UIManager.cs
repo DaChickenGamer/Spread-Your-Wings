@@ -38,13 +38,17 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(GameTimer());
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.GetSceneByName("Nest").buildIndex)
+            StartCoroutine(GameTimer());
     }
     
     void Update()
     {
-        UpdateCommunismText();
-        UpdateFollowersText();
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.GetSceneByName("Nest").buildIndex)
+        {
+            UpdateCommunismText();
+            UpdateFollowersText();
+        }
     }
     
     public void ShowThanksForPlayingPanel()
@@ -54,6 +58,14 @@ public class UIManager : MonoBehaviour
         timeRunning = false;
     }
 
+    public void OnPlayButtonClicked()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void OnQuitButtonClicked()
+    {
+        Application.Quit();
+    }
     public void GoToMainMenu()
     {
         SceneManager.LoadScene(0);

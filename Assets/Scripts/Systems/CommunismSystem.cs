@@ -17,7 +17,7 @@ public class CommunismSystem : MonoBehaviour
     // Add a instance later
     
     private int followers = 0;
-    private int communism = 190;
+    private int communism = 0;
     
     // Follow Stats
     public int followerMultiplier = 1;
