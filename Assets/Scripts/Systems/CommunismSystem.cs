@@ -11,6 +11,9 @@ using Random = UnityEngine.Random;
 
 public class CommunismSystem : MonoBehaviour
 {
+    private int communsimRequiredForLevelingUp = 200;
+    [SerializeField] private GameObject levelUpPrefab;
+    
     // Add a instance later
     
     private int followers = 0;
@@ -83,8 +86,17 @@ public class CommunismSystem : MonoBehaviour
 
     public GameObject middleOfScreenPoint;
     
+    public static CommunismSystem instance { get; private set; }
+    
     private void Awake()
     {
+        if (instance != null)
+        {
+            Debug.LogError("Found more than one Communist System in the scene.");
+        }
+
+        instance = this;
+        
         _playerMovement = GetComponent<PlayerMovement>();
         chanceToSucceed = 100;
         _fameSystem = FindObjectOfType<FameSystem>();
@@ -93,6 +105,8 @@ public class CommunismSystem : MonoBehaviour
     {
         UpdateEnemyCount();
         UpdatePercentToSucceed();
+        CheckForLevelUp();
+        UpdateLevelUp();
         if (!isUpdatingFollowers)
             StartCoroutine(FollowerIncome());
         if (((totalIntrusiveThoughtsDestroyed >= totalIntrusiveThoughts && doneSpawningIntrusiveThoughts) || chanceToSucceed <= 0) && isMinigameStarted)
@@ -101,6 +115,16 @@ public class CommunismSystem : MonoBehaviour
         }
     }
 
+    private void UpdateLevelUp()
+    {
+        string communismPercentFilled = Mathf.Ceil((float)communism / (float)communsimRequiredForLevelingUp * 100).ToString();
+        UIManager.instance.SetProgress(communism, communismPercentFilled);
+        UIManager.instance.SetMaxProgress(communsimRequiredForLevelingUp);
+    }
+    public void CheckForLevelUp()
+    {
+        if (communism < communsimRequiredForLevelingUp) return;
+    }
     public int GetCommunism()
     {
         return communism;
