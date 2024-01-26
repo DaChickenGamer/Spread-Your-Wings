@@ -238,7 +238,7 @@ public class CommunismSystem : MonoBehaviour
             return;
         }
         
-        int didPlayerSucceed = Random.Range(0, 100);
+        int didPlayerSucceed = Random.Range(0, 101);
         
         if (didPlayerSucceed <= chanceToSucceed)
         {
