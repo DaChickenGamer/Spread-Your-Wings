@@ -148,6 +148,9 @@ public class CommunismSystem : MonoBehaviour
 
         
         if (hit.collider == null) return;
+
+        Debug.Log(hit.collider.name);
+
         if (hit.collider.CompareTag("IntrusiveThought"))
         {
             totalIntrusiveThoughtsDestroyed += 1;
@@ -251,6 +254,7 @@ public class CommunismSystem : MonoBehaviour
             StartCoroutine(ShowResourcesGained(followersGained, communismGained));
             
             thoughtSpawnPoint.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.red;
+            thoughtSpawnPoint.gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
             Destroy(thoughtSpawnPoint.transform.GetChild(0).gameObject);
         }
         else
