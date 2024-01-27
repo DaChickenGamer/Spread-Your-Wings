@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public bool shouldMove = true;
 
     private Vector2 direction;
-    private Rigidbody2D rb; // Change to Rigibody if in 3D
+    private Rigidbody2D rb;
     private Animator animator;
     
     // Music Loop Test ( DELETE LATER )
@@ -22,14 +22,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); // Change to Rigibody if in 3D
-        //animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
     public void OnMovement(InputAction.CallbackContext ctxt)
     {
         direction = ctxt.ReadValue<Vector2>();
 
-       /*if (direction.x != 0 || direction.y != 0)
+       if (direction.x != 0 || direction.y != 0)
        {
             animator.SetFloat("X", direction.x);
             animator.SetFloat("Y", direction.y);
@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
        else
        {
             animator.SetBool("isWalking", false);
-       }*/
+       }
     }
 
     private void Start()
