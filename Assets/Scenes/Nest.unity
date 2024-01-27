@@ -4539,6 +4539,20 @@ MonoBehaviour:
       Data3: 1890362506
       Data4: 1443424642
     Path: event:/Music/Nest Music
+  <nestMusic>k__BackingField:
+    Guid:
+      Data1: -1287570845
+      Data2: 1126951347
+      Data3: 1890362506
+      Data4: 1443424642
+    Path: event:/Music/Nest Music
+  <menuMusic>k__BackingField:
+    Guid:
+      Data1: -1287570845
+      Data2: 1126951347
+      Data3: 1890362506
+      Data4: 1443424642
+    Path: event:/Music/Nest Music
   <testLoop>k__BackingField:
     Guid:
       Data1: -878263278
@@ -5062,7 +5076,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2077541074}
