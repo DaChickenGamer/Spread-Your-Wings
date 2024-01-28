@@ -124,7 +124,6 @@ public class CommunismSystem : MonoBehaviour
     private void CheckForLevelUp()
     {
         if (communism < communsimRequiredForLevelingUp) return;
-        UIManager.instance.ShowThanksForPlayingPanel();
     }
     public int GetCommunism()
     {
